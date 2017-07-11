@@ -7,26 +7,21 @@ import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
 public class AnpiMain {
+
 	private GpioController gpio;
 
 	/** Red LED : Raspi PIN 29 */
 	private GpioPinDigitalOutput pinRed;
 
-	private boolean status = false;
+	private boolean RED_HIGH = false;
 
 	public static void main(String[] args) {
 		AnpiMain anpi = new AnpiMain();
 
 		for (int i = 0; i < 100; i++) {
-			if (anpi.status) {
-				anpi.redOff();
-				anpi.status = false;
-			} else {
-				anpi.redOn();
-				anpi.status = true;
-			}
 
 			try {
+				anpi.flashRed();
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -55,16 +50,34 @@ public class AnpiMain {
 	/**
 	 * Raspi Red LED On
 	 */
-	public void redOn() {
+	public void flashRed() {
+		initilize();
+
+		if (RED_HIGH) {
+			redOff();
+			RED_HIGH = false;
+		} else {
+			redOn();
+			RED_HIGH = true;
+		}
+
+	}
+
+	/**
+	 * Raspi Red LED On
+	 */
+	private void redOn() {
 		initilize();
 		pinRed.high();
+		System.out.println("Red On");
 	}
 
 	/**
 	 * Raspi Red LED Off
 	 */
-	public void redOff() {
+	private void redOff() {
 		initilize();
 		pinRed.low();
+		System.out.println("Red Off");
 	}
 }
