@@ -10,10 +10,14 @@ public class AnpiMain {
 
 	private GpioController gpio;
 
-	/** Red LED : Raspi PIN 29 */
+	/** Red LED : Raspi PIN 29(21) */
 	private GpioPinDigitalOutput pinRed;
 
+	/** Red LED : Raspi PIN 28(20) */
+	private GpioPinDigitalOutput pinGreen;
+
 	private boolean RED_HIGH = false;
+	private boolean GREEN_HIGH = false;
 
 	public static void main(String[] args) {
 		AnpiMain anpi = new AnpiMain();
@@ -21,13 +25,15 @@ public class AnpiMain {
 		for (int i = 0; i < 100; i++) {
 
 			try {
-				anpi.flashRed();
+				anpi.flash();
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+				anpi.initilize();
 				System.exit(0);
 			}
 		}
+		anpi.initilize();
 	}
 
 	public AnpiMain() {
@@ -50,8 +56,7 @@ public class AnpiMain {
 	/**
 	 * Raspi Red LED On
 	 */
-	public void flashRed() {
-		initilize();
+	public void flash() {
 
 		if (RED_HIGH) {
 			redOff();
