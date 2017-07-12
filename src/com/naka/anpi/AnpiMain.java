@@ -56,8 +56,6 @@ public class AnpiMain {
 		pinRed.low();
 		pinGreen.low();
 
-		System.out.println("Anpi Initialized!!");
-
 	}
 
 	/**
@@ -65,12 +63,18 @@ public class AnpiMain {
 	 */
 	public void flash() {
 
-		if (RED_HIGH && !GREEN_HIGH) {
+		if (!RED_HIGH && !GREEN_HIGH) {
+			redOn();
+
+		} else if (RED_HIGH && !GREEN_HIGH) {
 			redOff();
 			greenOn();
 		} else if (!RED_HIGH && GREEN_HIGH) {
 			greenOff();
 			redOn();
+		} else {
+			redOff();
+			greenOff();
 		}
 	}
 
