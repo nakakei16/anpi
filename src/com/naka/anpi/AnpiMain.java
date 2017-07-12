@@ -63,6 +63,29 @@ public class AnpiMain {
 	 */
 	public void flash() {
 
+		if (!RED_HIGH && !GREEN_HIGH) {
+			System.out.println("ALL OFF : Red On");
+			redOn();
+
+		} else if (RED_HIGH && !GREEN_HIGH) {
+			System.out.println("RED ON/GREEN OFF : Red Off/Green On");
+			redOff();
+			greenOn();
+		} else if (!RED_HIGH && GREEN_HIGH) {
+			System.out.println("RED OFF/GREEN ON : Red On/Green Off");
+			greenOff();
+			redOn();
+		} else {
+			System.out.println("ELSE RED ON/GREEN ON : Red Off/Green Off");
+			redOff();
+			greenOff();
+		}
+	}
+
+	/**
+	 * Thins Method is to check for flashin LED
+	 */
+	private void check_flas() {
 		if (!RED_HIGH) {
 			redOn();
 		} else {
@@ -74,24 +97,6 @@ public class AnpiMain {
 		} else {
 			greenOff();
 		}
-
-		// if (!RED_HIGH && !GREEN_HIGH) {
-		// System.out.println("ALL OFF : Red On");
-		// redOn();
-		//
-		// } else if (RED_HIGH && !GREEN_HIGH) {
-		// System.out.println("RED ON/GREEN OFF : Red Off/Green On");
-		// redOff();
-		// greenOn();
-		// } else if (!RED_HIGH && GREEN_HIGH) {
-		// System.out.println("RED OFF/GREEN ON : Red On/Green Off");
-		// greenOff();
-		// redOn();
-		// } else {
-		// System.out.println("ELSE RED ON/GREEN ON : Red Off/Green Off");
-		// redOff();
-		// greenOff();
-		// }
 	}
 
 	/**
