@@ -68,6 +68,9 @@ public class AnpiMain {
 		} else if (!GREEN_HIGH) {
 			greenOn();
 			redOff();
+		} else if (GREEN_HIGH) {
+			redOff();
+			greenOff();
 		} else {
 			redOff();
 			greenOff();
