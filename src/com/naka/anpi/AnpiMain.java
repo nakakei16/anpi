@@ -55,7 +55,7 @@ public class AnpiMain {
 		}
 
 		pinRed.low();
-		pinGreen.low();
+//		pinGreen.low();
 
 	}
 
