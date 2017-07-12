@@ -64,15 +64,17 @@ public class AnpiMain {
 	 */
 	public void flash() {
 
-		if (!RED_HIGH && !GREEN_HIGH) {
-			System.out.println("======= RED ON =======");
-			redOn();
-		} else if (RED_HIGH && !GREEN_HIGH) {
-			System.out.println("== RED OFF  GREEN ON ==");
+		if (RED_HIGH) {
+			System.out.println("=== RED ON -> OFF ===");
 			redOff();
 			greenOn();
+
+		} else if (!RED_HIGH) {
+			System.out.println("=== RED OFF -> RED ON ===");
+			redOn();
+			greenOff();
 		} else {
-			System.out.println("== RED OFF  GREEN OFF ==");
+			System.out.println("== OTHERS -> ALL OFF");
 			redOff();
 			greenOff();
 		}
@@ -101,7 +103,6 @@ public class AnpiMain {
 	private void greenOn() {
 		pinGreen.high();
 		GREEN_HIGH = true;
-		System.out.println("Green On");
 	}
 
 	/**
@@ -110,7 +111,6 @@ public class AnpiMain {
 	private void greenOff() {
 		pinGreen.low();
 		GREEN_HIGH = false;
-		System.out.println("Green Off");
 	}
 
 	/**
@@ -119,7 +119,6 @@ public class AnpiMain {
 	private void redOn() {
 		pinRed.high();
 		RED_HIGH = true;
-		System.out.println("Red On");
 	}
 
 	/**
@@ -128,7 +127,6 @@ public class AnpiMain {
 	private void redOff() {
 		pinRed.low();
 		RED_HIGH = false;
-		System.out.println("Red Off");
 	}
 
 }
