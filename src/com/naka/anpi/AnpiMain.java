@@ -65,14 +65,14 @@ public class AnpiMain {
 	public void flash() {
 
 		if (!RED_HIGH && !GREEN_HIGH) {
-			System.out.println("RED ON");
+			System.out.println("======= RED ON =======");
 			redOn();
 		} else if (RED_HIGH && !GREEN_HIGH) {
-			System.out.println("RED OFF  GREEN ON");
+			System.out.println("== RED OFF  GREEN ON ==");
 			redOff();
 			greenOn();
 		} else {
-			System.out.println("RED OFF  GREEN OFF");
+			System.out.println("== RED OFF  GREEN OFF ==");
 			redOff();
 			greenOff();
 		}
