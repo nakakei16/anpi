@@ -13,7 +13,7 @@ public class AnpiMain {
 	/** Red LED : Raspi PIN 29(21) */
 	private GpioPinDigitalOutput pinRed;
 
-	/** Red LED : Raspi PIN 28(20) */
+	/** Green LED : Raspi PIN 28(20) */
 	private GpioPinDigitalOutput pinGreen;
 
 	private boolean RED_HIGH = false;
@@ -21,19 +21,21 @@ public class AnpiMain {
 
 	public static void main(String[] args) {
 		AnpiMain anpi = new AnpiMain();
+		anpi.initilize();
 
-		for (int i = 0; i < 100; i++) {
+		try {
 
-			try {
+			for (int i = 0; i < 100; i++) {
 				anpi.flash();
 				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				anpi.initilize();
-				System.exit(0);
 			}
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+
+		} finally {
+			anpi.initilize();
 		}
-		anpi.initilize();
 	}
 
 	public AnpiMain() {
@@ -47,9 +49,11 @@ public class AnpiMain {
 		if (gpio == null) {
 			gpio = GpioFactory.getInstance();
 			pinRed = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "Red", PinState.LOW);
+			pinGreen = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "Green", PinState.LOW);
 		}
 
 		pinRed.low();
+		pinGreen.low();
 
 	}
 
@@ -58,14 +62,33 @@ public class AnpiMain {
 	 */
 	public void flash() {
 
-		if (RED_HIGH) {
+		if (RED_HIGH && !GREEN_HIGH) {
 			redOff();
-			RED_HIGH = false;
-		} else {
+			greenOn();
+		} else if (!RED_HIGH && GREEN_HIGH) {
+			greenOff();
 			redOn();
-			RED_HIGH = true;
 		}
+	}
 
+	/**
+	 * Raspi Green LED On
+	 */
+	private void greenOn() {
+		initilize();
+		pinGreen.high();
+		GREEN_HIGH = true;
+		System.out.println("Green On");
+	}
+
+	/**
+	 * Raspi Green LED Off
+	 */
+	private void greenOff() {
+		initilize();
+		pinRed.low();
+		GREEN_HIGH = false;
+		System.out.println("Green Off");
 	}
 
 	/**
@@ -74,6 +97,7 @@ public class AnpiMain {
 	private void redOn() {
 		initilize();
 		pinRed.high();
+		RED_HIGH = true;
 		System.out.println("Red On");
 	}
 
@@ -83,6 +107,8 @@ public class AnpiMain {
 	private void redOff() {
 		initilize();
 		pinRed.low();
+		RED_HIGH = false;
 		System.out.println("Red Off");
 	}
+
 }
