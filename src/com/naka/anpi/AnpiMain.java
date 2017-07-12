@@ -50,12 +50,11 @@ public class AnpiMain {
 		if (gpio == null) {
 			gpio = GpioFactory.getInstance();
 			pinRed = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "Red", PinState.LOW);
-			// pinGreen = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28,
-			// "Green", PinState.LOW);
+			pinGreen = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "Green", PinState.LOW);
 		}
 
 		pinRed.low();
-//		pinGreen.low();
+		pinGreen.low();
 
 	}
 
@@ -68,6 +67,12 @@ public class AnpiMain {
 			redOn();
 		} else {
 			redOff();
+		}
+
+		if (!GREEN_HIGH) {
+			greenOn();
+		} else {
+			greenOff();
 		}
 
 		// if (!RED_HIGH && !GREEN_HIGH) {
@@ -93,7 +98,6 @@ public class AnpiMain {
 	 * Raspi Green LED On
 	 */
 	private void greenOn() {
-		initilize();
 		pinGreen.high();
 		GREEN_HIGH = true;
 		System.out.println("Green On");
@@ -103,8 +107,7 @@ public class AnpiMain {
 	 * Raspi Green LED Off
 	 */
 	private void greenOff() {
-		initilize();
-		pinRed.low();
+		pinGreen.low();
 		GREEN_HIGH = false;
 		System.out.println("Green Off");
 	}
@@ -113,7 +116,6 @@ public class AnpiMain {
 	 * Raspi Red LED On
 	 */
 	private void redOn() {
-		initilize();
 		pinRed.high();
 		RED_HIGH = true;
 		System.out.println("Red On");
@@ -123,7 +125,6 @@ public class AnpiMain {
 	 * Raspi Red LED Off
 	 */
 	private void redOff() {
-		initilize();
 		pinRed.low();
 		RED_HIGH = false;
 		System.out.println("Red Off");
