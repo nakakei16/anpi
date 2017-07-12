@@ -27,7 +27,8 @@ public class AnpiMain {
 			System.out.println("Anpi Start!!");
 
 			for (int i = 0; i < 100; i++) {
-				anpi.flash();
+//				anpi.flash();
+				anpi.check_flas();
 				Thread.sleep(1000);
 			}
 
