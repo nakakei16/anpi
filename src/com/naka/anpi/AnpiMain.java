@@ -62,15 +62,15 @@ public class AnpiMain {
 	 * Thins Method is to check for flashin LED
 	 */
 	private void check_flas() {
-		if (!RED_HIGH) {
+		if (!RED_HIGH && GREEN_HIGH) {
+			redOff();
+			greenOff();
+		} else if (!RED_HIGH) {
 			redOn();
 			greenOff();
 		} else if (!GREEN_HIGH) {
 			greenOn();
 			redOff();
-		} else if (GREEN_HIGH) {
-			redOff();
-			greenOff();
 		} else {
 			redOff();
 			greenOff();
