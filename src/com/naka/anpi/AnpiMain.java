@@ -24,6 +24,7 @@ public class AnpiMain {
 		anpi.initilize();
 
 		try {
+			System.out.println("Anpi Start!!");
 
 			for (int i = 0; i < 100; i++) {
 				anpi.flash();
@@ -54,6 +55,8 @@ public class AnpiMain {
 
 		pinRed.low();
 		pinGreen.low();
+
+		System.out.println("Anpi Initialized!!");
 
 	}
 
