@@ -63,7 +63,8 @@ public class AnpiMain {
 	 * Raspi Red LED On
 	 */
 	public void flash() {
-
+		initilize();
+		
 		if (RED_HIGH) {
 			System.out.println("=== RED ON -> OFF ===");
 			redOff();
