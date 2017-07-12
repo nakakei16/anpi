@@ -27,7 +27,6 @@ public class AnpiMain {
 			System.out.println("Anpi Start!!");
 
 			for (int i = 0; i < 100; i++) {
-//				anpi.flash();
 				 anpi.check_flas();
 				Thread.sleep(1000);
 			}
@@ -59,27 +58,6 @@ public class AnpiMain {
 
 	}
 
-	/**
-	 * Raspi Red LED On
-	 */
-	public void flash() {
-		initilize();
-		
-		if (RED_HIGH) {
-			System.out.println("=== RED ON -> OFF ===");
-			redOff();
-			greenOn();
-
-		} else if (!RED_HIGH) {
-			System.out.println("=== RED OFF -> RED ON ===");
-			redOn();
-			greenOff();
-		} else {
-			System.out.println("== OTHERS -> ALL OFF");
-			redOff();
-			greenOff();
-		}
-	}
 
 	/**
 	 * Thins Method is to check for flashin LED
@@ -91,10 +69,10 @@ public class AnpiMain {
 			redOff();
 		}
 
-		if (!GREEN_HIGH) {
-			greenOn();
-		} else {
+		if (!RED_HIGH) {
 			greenOff();
+		} else {
+			greenOn();
 		}
 	}
 
