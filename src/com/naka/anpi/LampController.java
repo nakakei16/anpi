@@ -6,16 +6,20 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
-public class LampOperator {
+public class LampController {
+	
 	private GpioController gpio;
+	
 	/** Red LED : Raspi PIN 29(21) */
 	private GpioPinDigitalOutput pinRed;
+	
 	/** Green LED : Raspi PIN 28(20) */
 	private GpioPinDigitalOutput pinGreen;
+	
 	private boolean RED_HIGH;
 	private boolean GREEN_HIGH;
 
-	public LampOperator() {
+	public LampController() {
 		initilize();
 	}
 
