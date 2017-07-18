@@ -17,7 +17,7 @@ public class AudioController {
 			return;
 		}
 
-		URL audioFileUrl = new URL(filePath);
+		URL audioFileUrl = new URL(createFileUrl(filePath));
 		AudioClip audio = Applet.newAudioClip(audioFileUrl);
 		audio.play();
 
