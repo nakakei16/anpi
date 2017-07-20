@@ -1,9 +1,14 @@
 package com.naka.anpi;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class AudioController {
 
@@ -12,34 +17,48 @@ public class AudioController {
 	public AudioController() {
 	}
 
-	public void playAudioByFile(String filePath) throws MalformedURLException {
-		if (filePath == null) {
+	/**
+	 * Play sound
+	 * 
+	 * @param full
+	 *            path filePath
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
+	 * @throws LineUnavailableException
+	 * @throws InterruptedException
+	 */
+	public void playAudioByFile(String fileName)
+			throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+		if (fileName == null) {
 			return;
 		}
 
-		URL audioFileUrl = new URL(createFileUrl(filePath));
-		AudioClip audio = Applet.newAudioClip(audioFileUrl);
-		audio.play();
+		AudioInputStream audioInputStream = null;
+		Clip clip = null;
 
-	}
+		try {
 
-	String createFileUrl(String filePath) {
-		if (filePath == null) {
-			return null;
-		}
+			URL url = getClass().getResource(fileName);
+			audioInputStream = AudioSystem.getAudioInputStream(url);
 
-		int length = filePath.length();
-		StringBuilder dealedFilePath = new StringBuilder(filePath);
+			clip = (Clip) AudioSystem.getLine(new Line.Info(Clip.class));
 
-		for (int i = 0; i < length; i++) {
-			String charact = filePath.substring(i, i + 1);
-			if (charact.equals("/")) {
-				dealedFilePath.delete(0, 1);
-			} else {
-				break;
+			clip.open(audioInputStream);
+			System.out.println("Open");
+			clip.loop(0);
+			System.out.println("Play");
+			Thread.sleep(3000);
+
+			while (clip.isRunning()) {
+				Thread.sleep(100);
 			}
-		}
 
-		return scheme + dealedFilePath.toString();
+			clip.stop();
+
+		} finally {
+			clip.close();
+			System.out.println("Close");
+
+		}
 	}
 }
