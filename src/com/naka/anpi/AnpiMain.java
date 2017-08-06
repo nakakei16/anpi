@@ -23,7 +23,7 @@ public class AnpiMain {
 
 			WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 			URI uri = URI.create(tagetURL);
-
+			
 			WebSocketClientController wsController = new WebSocketClientController(new BuildErrorListener() {
 
 				@Override
@@ -51,26 +51,13 @@ public class AnpiMain {
 
 				}
 			});
-			Session session;
-			session = container.connectToServer(wsController, uri);
 
-			for (int i = 0; i < 80 && session.isOpen(); i++) {
+			
+			Session session = container.connectToServer(wsController, uri);
+			while (session.isOpen()) {
 				Thread.sleep(1000);
-				System.out.println("open:" + i);
-
 			}
 
-			// LampController lampController = new LampController();
-			// AudioController audio = new AudioController();
-			//
-			// lampController.initilize();
-			//
-			// try {
-			//
-			// lampController.flashLamp();
-			// audio.playAudioByFile("audio/Tsukeyakiba.wav");;
-			// Thread.sleep(1000);
-			//
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -21,20 +21,17 @@ public class WebSocketClientControllerTest {
 		URI uri = URI.create(tagetURL);
 
 		WebSocketClientController wsController = new WebSocketClientController(new BuildErrorListener() {
-			
+
 			@Override
 			public void buildErrorOccured() {
 				System.out.println("BUILD ERROR OCCURED!!");
 
 			}
 		});
+		
 		Session session = container.connectToServer(wsController, uri);
-
-		while(session.isOpen()){
-//		for (int i = 0; i < 80 && session.isOpen(); i++) {
+		while (session.isOpen()) {
 			Thread.sleep(1000);
-//			System.out.println("open:" + i);
-
 		}
 	}
 }
