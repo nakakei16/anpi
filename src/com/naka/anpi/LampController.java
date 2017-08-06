@@ -10,14 +10,10 @@ public class LampController {
 	
 	private GpioController gpio;
 	
-	/** Red LED : Raspi PIN 29(21) */
-	private GpioPinDigitalOutput pinRed;
+	/** Pat Lamp  : Raspi PIN 29(21) */
+	private GpioPinDigitalOutput pitLamp;
 	
-	/** Green LED : Raspi PIN 28(20) */
-	private GpioPinDigitalOutput pinGreen;
-	
-	private boolean RED_HIGH;
-	private boolean GREEN_HIGH;
+	private boolean isPatLampFlashed;
 
 	public LampController() {
 		initilize();
@@ -29,63 +25,37 @@ public class LampController {
 	public void initilize() {
 		if (gpio == null) {
 			gpio = GpioFactory.getInstance();
-			pinRed = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "Red", PinState.LOW);
-			pinGreen = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "Green", PinState.LOW);
+			pitLamp = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "Red", PinState.LOW);
 		}
 
-		pinRed.low();
-		pinGreen.low();
+		pitLamp.low();
 	}
 
 	/**
 	 * Thins Method is flashing Lamp
 	 */
 	public void flashLamp() {
-		if (!RED_HIGH && GREEN_HIGH) {
-			redOff();
-			greenOff();
-		} else if (!RED_HIGH) {
-			redOn();
-			greenOff();
-		} else if (!GREEN_HIGH) {
-			greenOn();
-			redOff();
+		if (!isPatLampFlashed) {
+			patLampOn();
 		} else {
-			redOff();
-			greenOff();
+			patLampOff();
 		}
 	}
 
 	/**
-	 * Raspi Green LED On
+	 * Raspi Pat Lamp On
 	 */
-	private void greenOn() {
-		pinGreen.high();
-		GREEN_HIGH = true;
+	private void patLampOn() {
+		pitLamp.high();
+		isPatLampFlashed = true;
 	}
 
 	/**
-	 * Raspi Green LED Off
+	 * Raspi Pat Lamp Off
 	 */
-	private void greenOff() {
-		pinGreen.low();
-		GREEN_HIGH = false;
-	}
-
-	/**
-	 * Raspi Red LED On
-	 */
-	private void redOn() {
-		pinRed.high();
-		RED_HIGH = true;
-	}
-
-	/**
-	 * Raspi Red LED Off
-	 */
-	private void redOff() {
-		pinRed.low();
-		RED_HIGH = false;
+	private void patLampOff() {
+		pitLamp.low();
+		isPatLampFlashed = false;
 	}
 
 }

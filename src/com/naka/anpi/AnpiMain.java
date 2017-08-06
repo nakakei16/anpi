@@ -10,18 +10,15 @@ public class AnpiMain {
 	public static void main(String[] args) {
 
 		LampController lampController = new LampController();
+		AudioController audio = new AudioController();
+
 		lampController.initilize();
 
 		try {
 			
-			AudioController audio = new AudioController();
+			lampController.flashLamp();
 			audio.playAudioByFile("audio/Tsukeyakiba.wav");;
-
-		
-			for (int i = 0; i < 10; i++) {
-				lampController.flashLamp();
-				Thread.sleep(1000);
-			}
+			Thread.sleep(1000);
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
