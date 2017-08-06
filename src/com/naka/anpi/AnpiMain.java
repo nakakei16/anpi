@@ -28,7 +28,7 @@ public class AnpiMain {
 
 				@Override
 				public void buildErrorOccured() {
-
+					System.out.println("Build Error Occured");
 					lampController.initilize();
 
 					try {

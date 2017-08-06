@@ -42,9 +42,7 @@ public class AudioController {
 			clip = (Clip) AudioSystem.getLine(new Line.Info(Clip.class));
 
 			clip.open(audioInputStream);
-			System.out.println("Open");
 			clip.loop(0);
-			System.out.println("Play");
 			Thread.sleep(3000);
 
 			while (clip.isRunning()) {
@@ -55,8 +53,6 @@ public class AudioController {
 
 		} finally {
 			clip.close();
-			System.out.println("Close");
-
 		}
 	}
 }

@@ -19,8 +19,8 @@ public class JsonResultChecker {
 			JsonParser parser = factory.createParser(jenkinsResult);
 
 			while (parser.nextToken() != JsonToken.END_OBJECT) {
-				System.out.println(parser.getCurrentName());
-				System.out.println(parser.getValueAsString());
+//				System.out.println(parser.getCurrentName());
+//				System.out.println(parser.getValueAsString());
 
 				if (parser.getCurrentName() == null)
 					continue;

@@ -27,9 +27,6 @@ public class WebSocketClientController {
 
     @OnMessage
     public void receiveMessage(String receivedMessage) throws IOException {
-    	System.out.println("This is Message from Server:\n" + receivedMessage);
-
-    	// Not Safety
     	if(!JsonResultChecker.isBuildSuccess(receivedMessage) && buildErrorListener != null){
     		buildErrorListener.buildErrorOccured();
     		System.out.println("BUILD RESULT : FAILURE");
