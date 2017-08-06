@@ -6,5 +6,5 @@ public interface IConst {
 	public final long WEBSOCKET_SLEEP_INTERVAL = 1000;
 	public final String JSON_TARGET_NAME = "status";
 	public final String JSON_TARGET_VALUE = "FAILURE";
-	
+	public final long AUDIO_PLAY_INTERVAL = 1000;	
 }

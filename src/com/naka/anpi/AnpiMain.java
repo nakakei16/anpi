@@ -18,40 +18,7 @@ public class AnpiMain {
 		AudioController audio = new AudioController();
 
 		try {
-
-			WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-			URI uri = URI.create(IConst.WS_TARGET_URL);
-			
-			WebSocketClientController wsController = new WebSocketClientController(new BuildErrorListener() {
-
-				@Override
-				public void buildErrorOccured() {
-					System.out.println("Build Error Occured");
-					lampController.initilize();
-
-					try {
-
-						lampController.flashLamp();
-						audio.playAudioByFile(IConst.AUDIO_FILE);
-						Thread.sleep(1000);
-
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					} catch (UnsupportedAudioFileException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					} catch (LineUnavailableException e) {
-						e.printStackTrace();
-					} finally {
-						lampController.initilize();
-					}
-
-				}
-			});
-
-			
-			Session session = container.connectToServer(wsController, uri);
+			Session session = createSession(lampController, audio);
 			while (session.isOpen()) {
 				Thread.sleep(IConst.WEBSOCKET_SLEEP_INTERVAL);
 			}
@@ -65,5 +32,42 @@ public class AnpiMain {
 		} finally {
 			lampController.initilize();
 		}
+	}
+
+	private static Session createSession(LampController lampController, AudioController audio)
+			throws DeploymentException, IOException {
+
+		WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+		URI uri = URI.create(IConst.WS_TARGET_URL);
+		
+		WebSocketClientController wsController = new WebSocketClientController(new BuildErrorListener() {
+
+			@Override
+			public void buildErrorOccured() {
+				System.out.println("Build Error Occured");
+				lampController.initilize();
+
+				try {
+
+					lampController.flashLamp();
+					audio.playAudioByFile(IConst.AUDIO_FILE);
+					Thread.sleep(IConst.AUDIO_PLAY_INTERVAL);
+
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (UnsupportedAudioFileException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (LineUnavailableException e) {
+					e.printStackTrace();
+				} finally {
+					lampController.initilize();
+				}
+
+			}
+		});
+		
+		return container.connectToServer(wsController, uri);
 	}
 }
