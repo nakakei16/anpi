@@ -15,16 +15,6 @@ public class AudioController {
 	public AudioController() {
 	}
 
-	/**
-	 * Play sound
-	 * 
-	 * @param full
-	 *            path filePath
-	 * @throws UnsupportedAudioFileException
-	 * @throws IOException
-	 * @throws LineUnavailableException
-	 * @throws InterruptedException
-	 */
 	public void playAudioByFile(String fileName)
 			throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
 		if (fileName == null) {

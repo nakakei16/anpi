@@ -49,6 +49,5 @@ public class WebSocketClientController {
     }
     public void removeListener(){
     	this.buildErrorListener = null;
-    }
-    
+    }    
 }

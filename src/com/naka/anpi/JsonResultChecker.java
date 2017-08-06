@@ -19,19 +19,20 @@ public class JsonResultChecker {
 			JsonParser parser = factory.createParser(jenkinsResult);
 
 			while (parser.nextToken() != JsonToken.END_OBJECT) {
-				
+
 				if (parser.getCurrentName() == null)
 					continue;
-				
+
 				if (parser.getValueAsString() == null)
 					continue;
-		
-				if (parser.getCurrentName().equals("status") && parser.getValueAsString().equals("FAILURE")) {
+
+				if (parser.getCurrentName().equals(IConst.JSON_TARGET_NAME)
+						&& parser.getValueAsString().equals(IConst.JSON_TARGET_VALUE)) {
 					return false;
 				}
 			}
 			return true;
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -12,13 +12,11 @@ import org.junit.Test;
 
 public class WebSocketClientControllerTest {
 
-	private final String tagetURL = "ws://54.202.105.112:8081/jenkins";
-
 	@Test
 	public void test() throws DeploymentException, IOException, InterruptedException {
 
 		WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-		URI uri = URI.create(tagetURL);
+		URI uri = URI.create(IConst.WS_TARGET_URL);
 
 		WebSocketClientController wsController = new WebSocketClientController(new BuildErrorListener() {
 
@@ -28,10 +26,10 @@ public class WebSocketClientControllerTest {
 
 			}
 		});
-		
+
 		Session session = container.connectToServer(wsController, uri);
 		while (session.isOpen()) {
-			Thread.sleep(1000);
+			Thread.sleep(IConst.WEBSOCKET_SLEEP_INTERVAL);
 		}
 	}
 }

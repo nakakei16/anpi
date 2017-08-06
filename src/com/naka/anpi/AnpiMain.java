@@ -19,10 +19,8 @@ public class AnpiMain {
 
 		try {
 
-			String tagetURL = "ws://54.202.105.112:8081/jenkins";
-
 			WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-			URI uri = URI.create(tagetURL);
+			URI uri = URI.create(IConst.WS_TARGET_URL);
 			
 			WebSocketClientController wsController = new WebSocketClientController(new BuildErrorListener() {
 
@@ -34,7 +32,7 @@ public class AnpiMain {
 					try {
 
 						lampController.flashLamp();
-						audio.playAudioByFile("audio/Tsukeyakiba.wav");
+						audio.playAudioByFile(IConst.AUDIO_FILE);
 						Thread.sleep(1000);
 
 					} catch (InterruptedException e) {
@@ -55,7 +53,7 @@ public class AnpiMain {
 			
 			Session session = container.connectToServer(wsController, uri);
 			while (session.isOpen()) {
-				Thread.sleep(1000);
+				Thread.sleep(IConst.WEBSOCKET_SLEEP_INTERVAL);
 			}
 
 		} catch (InterruptedException e) {
