@@ -14,35 +14,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonResultChecker {
 
 	public static Boolean isBuildSuccess(String jenkinsResult) {
-
 		try {
+			JsonFactory factory = new JsonFactory();
+			JsonParser parser = factory.createParser(jenkinsResult);
 
-			List<BuildResult> buildResults = json2buildResults(jenkinsResult);
-			for (BuildResult buildResult : buildResults) {
-				if(buildResult.result == null) continue; 
-				if (buildResult.result.equals("FAILURE")) {
-					return false;
+			while (parser.nextToken() != JsonToken.END_OBJECT) {
+				System.out.println(parser.getCurrentName());
+				System.out.println(parser.getValueAsString());
+
+				if (parser.getCurrentName() == null)
+					continue;
+				
+				if (parser.getValueAsString() == null)
+					continue;
+		
+				if (parser.getCurrentName().equals("result")) {
+					return parser.getValueAsString().equals("FAILURE");
 				}
 			}
-			return true;
-
 		} catch (IOException e) {
 			e.printStackTrace();
-			return false;
 		}
-	}
 
-	private static List<BuildResult> json2buildResults(String jenkinsResult)
-			throws IOException, JsonParseException, JsonMappingException {
+		return true;
 
-		List<BuildResult> buildResults = new ArrayList<BuildResult>();
-		JsonFactory factory = new JsonFactory();
-		JsonParser parser = factory.createParser(jenkinsResult);
-
-		while (parser.nextToken() != JsonToken.END_OBJECT) {
-			ObjectMapper mapper = new ObjectMapper();
-			buildResults.add(mapper.readValue(jenkinsResult, BuildResult.class));
-		}
-		return buildResults;
 	}
 }

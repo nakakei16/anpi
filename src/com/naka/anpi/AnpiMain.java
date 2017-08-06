@@ -35,7 +35,6 @@ public class AnpiMain {
 
 						lampController.flashLamp();
 						audio.playAudioByFile("audio/Tsukeyakiba.wav");
-						;
 						Thread.sleep(1000);
 
 					} catch (InterruptedException e) {

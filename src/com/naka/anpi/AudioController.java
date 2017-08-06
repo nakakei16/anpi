@@ -12,8 +12,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class AudioController {
 
-	private final static String scheme = "file://";
-
 	public AudioController() {
 	}
 
