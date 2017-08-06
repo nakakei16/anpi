@@ -18,9 +18,11 @@ public class JsonResultChecker {
 			JsonFactory factory = new JsonFactory();
 			JsonParser parser = factory.createParser(jenkinsResult);
 
+			System.out.println(jenkinsResult);
+			
 			while (parser.nextToken() != JsonToken.END_OBJECT) {
-//				System.out.println(parser.getCurrentName());
-//				System.out.println(parser.getValueAsString());
+				System.out.println(parser.getCurrentName());
+				System.out.println(parser.getValueAsString());
 
 				if (parser.getCurrentName() == null)
 					continue;
@@ -28,10 +30,12 @@ public class JsonResultChecker {
 				if (parser.getValueAsString() == null)
 					continue;
 		
-				if (parser.getCurrentName().equals("result")) {
-					return parser.getValueAsString().equals("FAILURE");
+				if (parser.getCurrentName().equals("status") && parser.getValueAsString().equals("FAILURE")) {
+					return false;
 				}
 			}
+			return true;
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -27,7 +27,7 @@ public class WebSocketClientController {
 
     @OnMessage
     public void receiveMessage(String receivedMessage) throws IOException {
-    	if(!JsonResultChecker.isBuildSuccess(receivedMessage) && buildErrorListener != null){
+    	if(JsonResultChecker.isBuildSuccess(receivedMessage) == false && buildErrorListener != null){
     		buildErrorListener.buildErrorOccured();
     		System.out.println("BUILD RESULT : FAILURE");
     	}
