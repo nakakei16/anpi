@@ -27,7 +27,7 @@ public class LampController {
 			gpio = GpioFactory.getInstance();
 			pitLamp = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "Red", PinState.LOW);
 		}
-
+		patLampOff();
 		pitLamp.low();
 	}
 
