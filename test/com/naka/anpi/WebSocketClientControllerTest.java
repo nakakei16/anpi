@@ -18,10 +18,10 @@ public class WebSocketClientControllerTest {
 		WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 		URI uri = URI.create(IConst.WS_TARGET_URL);
 
-		WebSocketClientController wsController = new WebSocketClientController(new BuildErrorListener() {
+		WebSocketClientController wsController = new WebSocketClientController(new ErrorListener() {
 
 			@Override
-			public void buildErrorOccured() {
+			public void errorOccured() {
 				System.out.println("BUILD ERROR OCCURED!!");
 
 			}

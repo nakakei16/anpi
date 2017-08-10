@@ -13,9 +13,9 @@ import javax.websocket.Session;
 @ClientEndpoint
 public class WebSocketClientController {
 
-	private BuildErrorListener buildErrorListener = null;
+	private ErrorListener buildErrorListener = null;
 	
-    public WebSocketClientController(BuildErrorListener listener) {
+    public WebSocketClientController(ErrorListener listener) {
         super();
         this.buildErrorListener = listener;
     }
@@ -28,7 +28,7 @@ public class WebSocketClientController {
     @OnMessage
     public void receiveMessage(String receivedMessage) throws IOException {
     	if(JsonResultChecker.isBuildSuccess(receivedMessage) == false && buildErrorListener != null){
-    		buildErrorListener.buildErrorOccured();
+    		buildErrorListener.errorOccured();
     		System.out.println("BUILD RESULT : FAILURE");
     	}
     }
@@ -43,7 +43,7 @@ public class WebSocketClientController {
     	System.out.println("[ERROR] " + t.getMessage());
     }
     
-    public void addListener(BuildErrorListener listener){
+    public void addListener(ErrorListener listener){
     	if(this.buildErrorListener != null) return;
     	this.buildErrorListener = listener;
     }

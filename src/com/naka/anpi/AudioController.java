@@ -33,10 +33,10 @@ public class AudioController {
 
 			clip.open(audioInputStream);
 			clip.loop(0);
-			Thread.sleep(3000);
+			Thread.sleep(IConst.AUDIO_INTERVAL);
 
 			while (clip.isRunning()) {
-				Thread.sleep(100);
+				Thread.sleep(IConst.AUDIO_END_CHECK_TIME);
 			}
 
 			clip.stop();
