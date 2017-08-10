@@ -1,4 +1,4 @@
-package com.naka.anpi;
+package com.naka.anpi.business;
 
 import java.io.IOException;
 import java.net.URL;
@@ -9,6 +9,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import com.naka.anpi.IConst;
 
 public class AudioController {
 

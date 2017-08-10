@@ -1,4 +1,4 @@
-package com.naka.anpi;
+package com.naka.anpi.business;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.naka.anpi.IConst;
 
 public class JsonResultChecker {
 

@@ -10,6 +10,9 @@ import javax.websocket.WebSocketContainer;
 
 import org.junit.Test;
 
+import com.naka.anpi.business.WebSocketClientController;
+import com.naka.anpi.listener.ErrorListener;
+
 public class WebSocketClientControllerTest {
 
 	@Test

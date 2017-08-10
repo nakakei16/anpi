@@ -7,6 +7,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.junit.Test;
 
+import com.naka.anpi.business.AudioController;
+
 import junit.framework.TestCase;
 
 public class AudioControllerTest extends TestCase {

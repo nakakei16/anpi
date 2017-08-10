@@ -1,4 +1,4 @@
-package com.naka.anpi;
+package com.naka.anpi.business;
 
 import java.io.IOException;
 
@@ -9,6 +9,8 @@ import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+
+import com.naka.anpi.listener.ErrorListener;
 
 @ClientEndpoint
 public class WebSocketClientController {

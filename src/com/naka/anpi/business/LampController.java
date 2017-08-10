@@ -1,4 +1,4 @@
-package com.naka.anpi;
+package com.naka.anpi.business;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;

@@ -1,4 +1,4 @@
-package com.naka.anpi;
+package com.naka.anpi.listener;
 
 public interface ErrorListener {
 
